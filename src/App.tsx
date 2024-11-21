@@ -1,26 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import GoodsTable from './components/GoodsTable';
+import { GoodsDetails } from './components/GoodsDetails';
 
-function App() {
+import { Provider } from 'react-redux';
+// TODO: Add the Redux store implementation or correct the import path.
+// import store from './redux/store';
+
+import store from './store';
+
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}><Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<GoodsTable />} />
+          <Route path="/goods/:id" element={<GoodsDetails />} />
+        </Routes>
+      </div>
+    </Router></Provider>
   );
-}
+};
 
 export default App;
